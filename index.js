@@ -13,7 +13,7 @@ function deals(){
 function createDeal(){
   data = {
     stage_id: 1,
-    title: 'PP OCHOA',
+    title: 'DANIEL OCHOA',
     value: 1000
   };
   pipedrive.Deals.add(data, function(err, deal) {
@@ -29,6 +29,17 @@ function getDeal(id){
   });
 }
 
+function setProperties(id){
+  pipedrive.Deals.get(id, function(err, deal) {
+      if (err) throw err;
+      deal.set('stage_id', 3);
+      deal.save(function(err, dealSaved){
+        console.log('Deal Saved', dealSaved);
+      });
+  });
+}
+
 //deals();
 //createDeal();
-getDeal(11);
+//getDeal(12);
+setProperties(12);

@@ -5,22 +5,30 @@ function deals(){
   pipedrive.Deals.getAll({}, function(err, deals) {
       if (err) throw err;
       for (var i = 0; i < deals.length; i++) {
-          console.log(deals[i].title + ' (worth ' + deals[i].value + ' ' + deals[i].currency + ')');
+          console.log(deals[i].id + '/' + deals[i].title + ' (worth ' + deals[i].value + ' ' + deals[i].currency + ')');
       }
   });
 }
 
-function setDeal(){
+function createDeal(){
   data = {
     stage_id: 1,
     title: 'PP OCHOA',
     value: 1000
   };
   pipedrive.Deals.add(data, function(err, deal) {
+    if (err) throw err;
     console.log('Deal', deal);
   })
 }
 
-deals();
+function getDeal(id){
+  pipedrive.Deals.get(id, function(err, deal) {
+      if (err) throw err;
+      console.log('Deal', deal);
+  });
+}
 
-//setDeal();
+//deals();
+//createDeal();
+getDeal(11);
